@@ -1,8 +1,8 @@
-from django.shortcuts import render
 #  импортируем CreateView, чтобы создать ему наследника
 from django.views.generic import CreateView
 
-#  функция reverse_lazy позволяет получить URL по параметру "name" функции path()
+#  функция reverse_lazy позволяет получить URL по параметру
+# "name" функции path()
 #  берём, тоже пригодится
 from django.urls import reverse_lazy
 
@@ -17,11 +17,11 @@ send_mail(
     'Текст письма.',
     'from@example.com',  # Это поле "От кого"
     ['to@example.com'],  # Это поле "Кому" (можно указать список адресов)
-    fail_silently=False, # Сообщать об ошибках («молчать ли об ошибках?»)
+    fail_silently=False,  # Сообщать об ошибках («молчать ли об ошибках?»)
 )
 
 
 class SignUp(CreateView):
     form_class = CreationForm
-    success_url = reverse_lazy("signup") #  где signup — это параметр "name" в path()
-    template_name = "signup.html" 
+    success_url = reverse_lazy("signup")
+    template_name = "signup.html"
