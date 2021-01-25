@@ -23,7 +23,7 @@ def new_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
-            post=form.save(commit=False)
+            post = form.save(commit=False)
             post.author = request.user
             post.save()
             return redirect('index')
