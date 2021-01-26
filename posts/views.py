@@ -1,10 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-
-from .models import Post, Group
-
-from .forms import PostForm
-
 from django.contrib.auth.decorators import login_required
+from .models import Post, Group
+from .forms import PostForm
 
 
 def index(request):
@@ -20,13 +17,11 @@ def group_posts(request, slug):
 
 @login_required
 def new_post(request):
+    form = PostForm(request.POST or None)
     if request.method == 'POST':
-        form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.save()
             return redirect('index')
-        return render(request, 'new.html', {'form': form})
-    form = PostForm()
     return render(request, 'new.html', {'form': form})
